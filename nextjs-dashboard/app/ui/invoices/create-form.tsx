@@ -1,5 +1,7 @@
+"use client";
 import { CustomerField } from '@/app/lib/definitions';
 import Link from 'next/link';
+import {useActionState} from 'react-server-dom-webpack/server.edge'
 import {
   CheckIcon,
   ClockIcon,
@@ -22,6 +24,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
             <select
               id="customer"
               name="customerId"
+              required
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               defaultValue=""
             >
@@ -29,7 +32,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
                 Select a customer
               </option>
               {customers.map((customer) => (
-                <option key={customer.id} value={customer.id}>
+                <option  key={customer.id} value={customer.id}>
                   {customer.name}
                 </option>
               ))}
@@ -50,6 +53,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
                 name="amount"
                 type="number"
                 step="0.01"
+                required
                 placeholder="Enter USD amount"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
               />
@@ -71,6 +75,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
                   name="status"
                   type="radio"
                   value="pending"
+                  required
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
@@ -87,6 +92,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
                   type="radio"
                   value="paid"
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                  required
                 />
                 <label
                   htmlFor="paid"
@@ -101,7 +107,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
-          href="/dashboard/invoices"
+          href="/page/dashboard/invoices"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancel
